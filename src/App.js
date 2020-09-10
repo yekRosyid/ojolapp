@@ -18,12 +18,16 @@ import {
 
 import {NavigationContainer} from '@react-navigation/native';
 import Router from './route';
+import {Provider} from 'react-redux';
+import {strore} from './redux';
 
 const App: () => React$Node = () => {
   return (
-    <NavigationContainer>
-      <Router />
-    </NavigationContainer>
+    <Provider store={strore}>
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
+    </Provider>
   );
 };
 
