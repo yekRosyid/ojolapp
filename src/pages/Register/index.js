@@ -3,29 +3,30 @@ import {View, Text, Image} from 'react-native';
 import {Colors} from '../../utils';
 import {Input, Button} from '../../components/atoms';
 import {backIcon, registerIlustrasi} from '../../assets';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Register = () => {
   const RegisterReducer = useSelector((state) => state.RegisterReducer);
 
-  const [form, setform] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-  });
+  //menggnakan redux
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  console.log(RegisterReducer)
-}, [RegisterReducer])
+  // menggunakan local state
+  // const [form, setform] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   password: '',
+  // });
 
   const onInputChange = (value, input) => {
-    setform({
-      ...form,
-      [input]: value,
-    });
+    // setform({
+    //   ...form,
+    //   [input]: value,
+    // });
+    dispatch({type: 'SET_FORM', inputType: input, inputValue: value});
   };
   const sendData = () => {
-    console.log('Data yang akan dikirim', form);
+    console.log('Data yang akan dikirim', RegisterReducer.form);
   };
 
   return (
@@ -33,24 +34,24 @@ useEffect(() => {
       <Image source={backIcon} style={styles.iconBack} />
       <Image source={registerIlustrasi} style={styles.ilustration} />
       <Text style={styles.textAttention}>
-        Mohon mengisi data untuk proses register anda
+        Mohon mengisi data untuk proses register anda {RegisterReducer.tittle}
       </Text>
       <View style={styles.space(40)} />
       <Input
         placeholder="Nama Lengkap"
-        value={form.fullName}
+        value={RegisterReducer.form.fullName}
         onChangeText={(value) => onInputChange(value, 'fullName')}
       />
       <View style={styles.space(33)} />
       <Input
         placeholder="Email"
-        value={form.email}
+        value={RegisterReducer.form.email}
         onChangeText={(value) => onInputChange(value, 'email')}
       />
       <View style={styles.space(33)} />
       <Input
         placeholder="Password"
-        value={form.password}
+        value={RegisterReducer.form.password}
         onChangeText={(value) => onInputChange(value, 'password')}
         secureTextEntry={true}
       />

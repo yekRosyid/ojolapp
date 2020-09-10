@@ -5,11 +5,31 @@ const initialState = {
 };
 
 const initialRegister = {
+  form: {
+    fullName: '',
+    email: '',
+    password: '',
+  },
   tittle: 'Register page',
   desc: 'Ini adalah deskripsi register page',
 };
 
 const RegisterReducer = (state = initialRegister, action) => {
+  if (action.type === 'SET_TITLE') {
+    return {
+      ...state,
+      tittle: 'Register Ganti tittle',
+    };
+  }
+  if (action.type === 'SET_FORM') {
+    return {
+      ...state,
+      form: {
+        ...state.form,
+        [action.inputType]: action.inputValue,
+      },
+    };
+  }
   return state;
 };
 
