@@ -34,11 +34,24 @@ const RegisterReducer = (state = initialRegister, action) => {
 };
 
 const initialLogin = {
+  form: {
+    email: '',
+    password: '',
+  },
   info: 'Tolong masukkan password anda',
   isLogin: true,
 };
 
 const LoginReducer = (state = initialLogin, action) => {
+  if (action.type === 'SET_FORM') {
+    return {
+      ...state,
+      form: {
+        ...state.form,
+        [action.inputType]: action.inputValue,
+      },
+    };
+  }
   return state;
 };
 
